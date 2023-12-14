@@ -331,7 +331,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4055359352563380143}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   - component: {fileID: 1722736349339665040}
   - component: {fileID: 4833184349447098907}
   - component: {fileID: 3379302934724504211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: slice14
   m_TagString: Untagged
   m_Icon: {fileID: 0}

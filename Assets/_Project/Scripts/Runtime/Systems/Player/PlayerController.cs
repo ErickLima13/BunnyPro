@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     private float speedY;
     private bool isGrounded;
     private bool isLeft;
-
+    private GameManager gameManager;
+    
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
 
@@ -16,10 +17,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 boxSize;
     [SerializeField] private LayerMask groundMask;
 
-    private float horizontal;
+    public float horizontal;
 
     private void Start()
     {
+        gameManager = GameManager.Instance; 
         animator = GetComponentInChildren<Animator>();
         playerRb = GetComponent<Rigidbody2D>();
     }
@@ -88,6 +90,8 @@ public class PlayerController : MonoBehaviour
         float scaleX = transform.localScale.x;
         scaleX *= -1f;
         transform.localScale = new(scaleX, transform.localScale.y, transform.localScale.z);
+
+        gameManager.offsetX *= -1;
 
     }
 

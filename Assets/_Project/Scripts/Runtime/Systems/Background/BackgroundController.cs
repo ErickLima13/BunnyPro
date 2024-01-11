@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
+    public enum Cena
+    {
+        Gameplay,
+        Titulo
+    }
+
     public string sortingOrder;
     public int orderInLayer;
 
@@ -10,34 +16,86 @@ public class BackgroundController : MonoBehaviour
     private Renderer mRenderer;
 
     private float offSet;
+    private float speedController;
+    private float prevCamX;
+
     public float speedOffSet;
 
     private Material currentMaterial;
     private GameManager gameManager;
 
+    public Cena cenaAtual;
+
     private void Start()
     {
-        gameManager = GameManager.Instance;
         mRenderer = GetComponent<Renderer>();
         mRenderer.sortingLayerName = sortingOrder;
         mRenderer.sortingOrder = orderInLayer;
         currentMaterial = mRenderer.material;
-        ChangeBackground();
+
+        if (IsGameplay())
+        {
+            gameManager = GameManager.Instance;
+            idCenarioPrev = gameManager.idCenario;
+            ChangeBackground();
+        }
+
     }
 
     private void Update()
     {
-        if (idCenarioPrev != gameManager.idCenario)
+        if (IsGameplay())
         {
-            ChangeBackground();
-        }
+            if (idCenarioPrev != gameManager.idCenario)
+            {
+                ChangeBackground();
+            }
 
-        offSet += speedOffSet;
-        currentMaterial.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
+            float horizontalPlayer = gameManager.player.horizontal;
+            if (horizontalPlayer == 0)
+            {
+                speedController = 0f;
+            }
+            else
+            {
+                if (horizontalPlayer > 0)
+                {
+                    speedController = 1;
+                }
+                else
+                {
+                    speedController = -1;
+                }
+            }
+
+            if (gameManager.cam.transform.position.x != prevCamX)
+            {
+                offSet += speedOffSet * speedController;
+                currentMaterial.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
+            }
+        }
+        else
+        {
+            offSet += speedOffSet;
+            currentMaterial.SetTextureOffset("_MainTex", new Vector2(offSet, 0));
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (IsGameplay())
+        {
+            prevCamX = gameManager.cam.transform.position.x;
+        }
     }
 
     private void ChangeBackground()
     {
+        if (gameManager == null)
+        {
+            gameManager = GameManager.Instance;
+        }
+
         idCenarioPrev = gameManager.idCenario;
 
         switch (orderInLayer)
@@ -56,7 +114,13 @@ public class BackgroundController : MonoBehaviour
                 break;
         }
 
+        gameManager.cam.backgroundColor = gameManager.skyColor[idCenarioPrev];
         currentMaterial = mRenderer.material;
 
+    }
+
+    private bool IsGameplay()
+    {
+        return cenaAtual == Cena.Gameplay;
     }
 }

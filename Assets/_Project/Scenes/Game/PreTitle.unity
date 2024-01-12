@@ -167,7 +167,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -488,6 +488,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music: {fileID: 351107687}
   fx: {fileID: 1885750678}
+  title: {fileID: 8300000, guid: bcb1d02969fa40241bc6548952e0c081, type: 3}
+  map: {fileID: 8300000, guid: f72f1c556bb978d419f1d9864c8fe0fd, type: 3}
+  fase: {fileID: 8300000, guid: 6fa2c200fcb2ada468b95ad9e79f70e2, type: 3}
+  gameOver: {fileID: 8300000, guid: 179bdc334c2047040af4efff612277d2, type: 3}
+  coletavel: {fileID: 8300000, guid: c7cf52375eb028c4f8631670f25e5fdd, type: 3}
   fadeAnimator: {fileID: 2078155154}
 --- !u!1 &890908371
 GameObject:
@@ -735,7 +740,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 999
   m_TargetDisplay: 0
 --- !u!1 &1438762880
 GameObject:
@@ -1041,7 +1046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8200ac47a9ddc458e57fe6130c96cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDone: 0
+  isFinish: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -6,9 +6,19 @@ public class AudioController : MonoBehaviour
 {
     private IsDone isDone;
 
-    [Header("Componentes")]
+    [Header("Audio Controller")]
     public AudioSource music;
     public AudioSource fx;
+
+    [Header("Musicas")]
+    public AudioClip title;
+    public AudioClip map;
+    public AudioClip fase;
+    public AudioClip gameOver;
+
+    [Header("Fx")]
+    public AudioClip coletavel;
+
     public Animator fadeAnimator;
 
     private string novaCena;
@@ -22,6 +32,10 @@ public class AudioController : MonoBehaviour
 
     private void Start()
     {
+        music.clip = title;
+        music.loop = true;
+        music.Play();
+
         LoadNewScene("Title");
     }
 

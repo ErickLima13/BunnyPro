@@ -1,7 +1,17 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 {
+
+    public enum ModoJogo
+    {
+        Desenvolvimento,
+        Producao
+    }
+
+    public ModoJogo modo;
+
     [Header("Config Cenario Bg")]
     public int idCenario;
     public Transform backGrounds;
@@ -26,10 +36,18 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
     public PlayerController player;
     private Vector3 posPlayer;
 
+    private AudioController audioController;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
-        cam = Camera.main;
+
+        if (modo == ModoJogo.Producao)
+        {
+            audioController = FindObjectOfType<AudioController>();
+            audioController.FadeOut();
+        }
+      
 
         Criarfase();
     }
@@ -52,6 +70,12 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
         temp = Instantiate(hillPrefabs[0], transform.position + new Vector3(qtdCenarios * tamanhoCenario, 0, 0), transform.localRotation);
         rightLimit.position = temp.transform.position;
+
+        if ( audioController!= null && modo == ModoJogo.Producao )
+        {
+            audioController.FadeOut();
+        }
+
     }
 
     private void MoveCam()

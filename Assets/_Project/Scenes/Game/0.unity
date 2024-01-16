@@ -601,6 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b771d2f6474d9314584fc4a2d669f030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modo: 0
   idCenario: 0
   backGrounds: {fileID: 1894314638}
   BG0:
@@ -638,8 +639,8 @@ MonoBehaviour:
   upLimit: {fileID: 654690613}
   leftLimit: {fileID: 687796030}
   rightLimit: {fileID: 340458299}
-  cam: {fileID: 0}
-  player: {fileID: 0}
+  cam: {fileID: 519420031}
+  player: {fileID: 1388998609}
 --- !u!4 &1203103444
 Transform:
   m_ObjectHideFlags: 0

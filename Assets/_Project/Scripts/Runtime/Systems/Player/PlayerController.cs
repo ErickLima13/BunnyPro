@@ -4,14 +4,20 @@ public class PlayerController : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D playerRb;
+
     private int idAnim;
     private float speedY;
+
     private bool isGrounded;
     private bool isLeft;
+    private bool isFall;
+    private bool isDoubleJump;
+
     private GameManager gameManager;
     
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
+    [SerializeField] [Range(0.7f,0.9f)] private float percDoubleJumpForce;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Vector2 boxSize;
@@ -29,6 +35,11 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundMask);
+        if (isGrounded)
+        {
+            isFall = false;
+            isDoubleJump = true;
+        }
     }
 
     private void Update()
@@ -68,12 +79,25 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        speedY = playerRb.velocity.y;
-
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerRb.AddForce(new Vector2(0, jumpForce));
         }
+
+        if (Input.GetButtonDown("Jump") && !isGrounded && isDoubleJump)
+        {
+            playerRb.velocity = new Vector2(0, 0);
+            playerRb.AddForce(new Vector2(0, jumpForce * percDoubleJumpForce));
+            isDoubleJump = false;
+        }
+
+        if (Input.GetButtonUp("Jump") && !isFall)
+        { 
+            playerRb.velocity = new Vector2(0, playerRb.velocity.y / 2);
+            isFall = true;
+        }
+
+        speedY = playerRb.velocity.y;
     }
 
     private void UpdateAnimator()

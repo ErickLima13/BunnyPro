@@ -20,6 +20,12 @@ public class Reskin : MonoBehaviour
     private void Start()
     {
         DBPersonagens = FindObjectOfType<DBPersonagens>();
+
+        if (DBPersonagens == null)
+        {
+            return;
+        }
+
         spriteSheetName = DBPersonagens.spriteSheetName[DBPersonagens.idPersonagem].name;
 
         if (!isMap)
@@ -30,11 +36,17 @@ public class Reskin : MonoBehaviour
         {
             imageMap = GetComponent<Image>();   
         }
-       
+
+        LoadSpriteSheet();
     }
 
     private void LateUpdate()
     {
+        if (DBPersonagens == null)
+        {
+            return;
+        }
+
         if (DBPersonagens.idPersonagem != DBPersonagens.idPersonagemAtual)
         {
             spriteSheetName = DBPersonagens.spriteSheetName[DBPersonagens.idPersonagem].name;

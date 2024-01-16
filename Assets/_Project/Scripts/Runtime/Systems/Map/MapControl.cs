@@ -1,16 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapControl : MonoBehaviour
 {
-    private AudioController audioController;
-
     [SerializeField] private ButtonFase[] buttonFase;
     [SerializeField] private int totalFases;
 
     private void Start()
     {
-        audioController = FindObjectOfType<AudioController>();
-        audioController.FadeOut();
         SetupMap();
     }
 
@@ -19,9 +16,8 @@ public class MapControl : MonoBehaviour
         foreach (ButtonFase b in buttonFase)
         {
             b.SetTextNumber(totalFases.ToString());
+            b.idFase = totalFases;
             totalFases++;
         }
     }
-
-
 }

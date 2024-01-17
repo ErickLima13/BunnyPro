@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
-    [SerializeField] [Range(0.7f,0.9f)] private float percDoubleJumpForce;
+    [SerializeField][Range(0.5f, 0.9f)] private float percDoubleJumpForce = 0.7f;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Vector2 boxSize;
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundMask);
+
         if (isGrounded)
         {
             isFall = false;

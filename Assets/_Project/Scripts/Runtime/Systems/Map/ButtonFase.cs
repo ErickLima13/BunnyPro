@@ -10,7 +10,7 @@ public class ButtonFase : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI faseText;
     [SerializeField] private GameObject block;
-    
+
     public Transform avatarPinPos;
 
     public int idFase;
@@ -74,7 +74,7 @@ public class ButtonFase : MonoBehaviour
 
     public void LiberarFase()
     {
-        if(isBlock && controlScene.qtdCenouras >= qtdCenouraCusto)
+        if (isBlock && controlScene.qtdCenouras >= qtdCenouraCusto)
         {
             controlScene.qtdCenouras -= qtdCenouraCusto;
             isBlock = false;
@@ -84,9 +84,9 @@ public class ButtonFase : MonoBehaviour
 
     public void SelecionarFase()
     {
-        if(!isBlock)
+        if (!isBlock)
         {
-            controlScene.avatarPin.transform.parent = transform;
+            controlScene.avatarPin.transform.SetParent(transform);
             controlScene.avatarPin.transform.position = avatarPinPos.position;
         }
     }

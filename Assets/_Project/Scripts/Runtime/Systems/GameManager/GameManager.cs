@@ -1,9 +1,16 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum GameState
+{
+    Intro,
+    Map,
+    Gameplay
+}
+
 public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 {
-
     public enum ModoJogo
     {
         Desenvolvimento,
@@ -11,6 +18,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
     }
 
     public ModoJogo modo;
+    public bool isEndless;
+    public GameState currentState;
 
     [Header("Config Cenario Bg")]
     public int idCenario;
@@ -52,6 +61,10 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
     private AudioController audioController;
 
+    [Header("Start Game")]
+    public Image gameplayImage;
+    public Sprite[] spritesGameplay;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
@@ -62,15 +75,27 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         }
 
         Criarfase();
+
+        gameplayImage.enabled = false;
     }
 
     private void Update()
     {
+        if (!IsGameplay())
+        {
+            return;
+        }
+
         CheckProgressBar();
     }
 
     private void FixedUpdate()
     {
+        if (!IsGameplay())
+        {
+            return;
+        }
+
         MoveCam();
     }
 
@@ -83,14 +108,15 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         {
             perc = 0;
         }
-        else if (perc >= 1)
+        else if (perc >= 0.99f)
         {
             perc = 1;
         }
 
-        if (perc >= 0.99f)
+        if (perc >= 1f)
         {
             checkC.color = Color.white;
+            LevelComplete();
         }
         if (perc >= 0.66f)
         {
@@ -106,6 +132,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
     private void Criarfase()
     {
+        currentState = GameState.Gameplay;
+
         GameObject temp = null;
         int rand;
         int instanciados = 1;
@@ -156,6 +184,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
             audioController.FadeOut();
         }
 
+        StartCoroutine(StartGameplay());
+
     }
 
     private void MoveCam()
@@ -188,5 +218,33 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         backGrounds.position = new(cam.transform.position.x, 0, 0);
     }
 
+    private IEnumerator StartGameplay()
+    {
+        yield return new WaitForSeconds(1f);
 
+        for (int i = 0; i < 3; i++)
+        {
+            gameplayImage.enabled = true;
+            yield return new WaitForSeconds(0.3f);
+            gameplayImage.enabled = false;
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        player.horizontal = 1;
+    }
+
+    private void LevelComplete()
+    {
+        gameplayImage.sprite = spritesGameplay[2];
+        gameplayImage.enabled = true;
+        player.horizontal = 0;
+        audioController.TrocarCena("Map", true, audioController.map);
+        currentState = GameState.Map;
+
+    }
+
+    private bool IsGameplay()
+    {
+        return currentState == GameState.Gameplay;
+    }
 }

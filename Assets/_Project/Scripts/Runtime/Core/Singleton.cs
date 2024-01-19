@@ -17,7 +17,7 @@ namespace PainfulSmile.Runtime.Core
             }
 
             Instance = this as T;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
     }
 }

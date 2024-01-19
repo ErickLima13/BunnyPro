@@ -53,7 +53,10 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        if (!gameManager.isEndless)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+        }
 
         playerRb.velocity = new(horizontal * speed, speedY);
 

@@ -14,6 +14,7 @@ public class AudioController : MonoBehaviour
     public AudioClip title;
     public AudioClip map;
     public AudioClip fase;
+    public AudioClip fase2;
     public AudioClip gameOver;
 
     [Header("Fx")]
@@ -37,6 +38,27 @@ public class AudioController : MonoBehaviour
         music.Play();
 
         LoadNewScene("Title");
+    }
+
+
+    public IEnumerator ChangeMusic(AudioClip novaMusica)
+    {
+        float volumeMaximo = music.volume;
+
+        for (float volume = music.volume; volume > 0; volume -= 0.01f)
+        {
+            music.volume = volume;
+            yield return new WaitForEndOfFrame();
+        }
+
+        music.clip = novaMusica;
+        music.Play();
+
+        for (float volume = 0; volume < volumeMaximo; volume += 0.01f)
+        {
+            music.volume = volume;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void TrocarCena(string nomeCena, bool isMudarMusica, AudioClip musica)

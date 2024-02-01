@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b771d2f6474d9314584fc4a2d669f030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modo: 0
+  modo: 1
   isEndless: 1
   currentState: 0
   idCenario: 0
@@ -1069,8 +1069,11 @@ MonoBehaviour:
   - {r: 0.5058824, g: 0.7960785, b: 0.9960785, a: 1}
   - {r: 0.77647066, g: 0.8745099, b: 0.9686275, a: 1}
   - {r: 0.21176472, g: 0.14117648, b: 0.3803922, a: 1}
+  isTransition: 1
   tamanhoCenario: 14.4
   qtdCenarios: 1
+  idTema: 0
+  transitionPrefab: {fileID: 2324767156105307927, guid: dbab934f0dda7594faad1891cced05a8, type: 3}
   hillPrefabs:
   - {fileID: 4598346261662992554, guid: f7c6666d23ff4834187499d71801dff9, type: 3}
   - {fileID: 7627459128318532939, guid: 09731d58092c2d5419c30ef7049aa39b, type: 3}
@@ -1080,6 +1083,13 @@ MonoBehaviour:
   - {fileID: 2324767156105307927, guid: 5cd86f273d4130b4782401cffa126abf, type: 3}
   - {fileID: 2324767156105307927, guid: c1ce23300f54a4542a270e389e2f7b54, type: 3}
   - {fileID: 2324767156105307927, guid: 8035c053445f0bf418795f1fe2c4b66b, type: 3}
+  desertPrefabs:
+  - {fileID: 2324767156105307927, guid: 25b222fbad12eca449239af4cfa9fb54, type: 3}
+  - {fileID: 2324767156105307927, guid: f8a37beaec874044f9b828c42588b8ef, type: 3}
+  desertPrefabsCheckPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 2324767156105307927, guid: 0aa8d24889a1a8d4bac22ad6bba89359, type: 3}
   speedCam: 0.1
   offsetX: 2.5
   offsetY: 2.2

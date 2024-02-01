@@ -491,6 +491,7 @@ MonoBehaviour:
   title: {fileID: 8300000, guid: bcb1d02969fa40241bc6548952e0c081, type: 3}
   map: {fileID: 8300000, guid: f72f1c556bb978d419f1d9864c8fe0fd, type: 3}
   fase: {fileID: 8300000, guid: 6fa2c200fcb2ada468b95ad9e79f70e2, type: 3}
+  fase2: {fileID: 8300000, guid: da1829238a34b434389e7cf3553374b0, type: 3}
   gameOver: {fileID: 8300000, guid: 179bdc334c2047040af4efff612277d2, type: 3}
   coletavel: {fileID: 8300000, guid: c7cf52375eb028c4f8631670f25e5fdd, type: 3}
   fadeAnimator: {fileID: 2078155154}
@@ -554,6 +555,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b771d2f6474d9314584fc4a2d669f030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modo: 0
+  isEndless: 0
+  currentState: 0
   idCenario: 0
   backGrounds: {fileID: 0}
   BG0:
@@ -576,14 +580,20 @@ MonoBehaviour:
   - {r: 0.5058824, g: 0.7960785, b: 0.9960785, a: 1}
   - {r: 0.77647066, g: 0.8745099, b: 0.9686275, a: 1}
   - {r: 0.21176472, g: 0.14117648, b: 0.3803922, a: 1}
+  isTransition: 0
   tamanhoCenario: 14.4
   qtdCenarios: 6
+  idTema: 0
+  transitionPrefab: {fileID: 0}
   hillPrefabs:
   - {fileID: 2324767156105307927, guid: a3c113cdba3edb2448ab4a64f5c347d2, type: 3}
   - {fileID: 4598346261662992554, guid: f7c6666d23ff4834187499d71801dff9, type: 3}
   - {fileID: 7627459128318532939, guid: 09731d58092c2d5419c30ef7049aa39b, type: 3}
   - {fileID: 7834925677726300894, guid: 6ab965eb47c23344c9350fce7dc23739, type: 3}
   - {fileID: 3974234213755176711, guid: 1a9080a7273f0cf46bbb5951640bc6ae, type: 3}
+  hillPrefabsCheckPoints: []
+  desertPrefabs: []
+  desertPrefabsCheckPoints: []
   speedCam: 0.05
   offsetX: 2.5
   offsetY: 0
@@ -592,7 +602,18 @@ MonoBehaviour:
   leftLimit: {fileID: 608888865}
   rightLimit: {fileID: 1088550642}
   cam: {fileID: 0}
+  checkA: {fileID: 0}
+  checkB: {fileID: 0}
+  checkC: {fileID: 0}
+  progressBar: {fileID: 0}
+  distancia: 0
+  distanciaAtual: 0
+  perc: 0
+  chegada: {fileID: 0}
+  ajuste: 1.2
   player: {fileID: 0}
+  gameplayImage: {fileID: 0}
+  spritesGameplay: []
 --- !u!4 &1076973989
 Transform:
   m_ObjectHideFlags: 0

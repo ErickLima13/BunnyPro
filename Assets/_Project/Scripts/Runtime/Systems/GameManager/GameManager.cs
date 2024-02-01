@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public enum GameState
 {
@@ -28,10 +29,16 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
     public Color[] skyColor;
 
     [Header("Geracao mapa fase")]
+    public bool isTransition;
     public float tamanhoCenario;
     public int qtdCenarios;
+    public int idTema;
+    public GameObject transitionPrefab;
     public GameObject[] hillPrefabs;
     public GameObject[] hillPrefabsCheckPoints;
+
+    public GameObject[] desertPrefabs;
+    public GameObject[] desertPrefabsCheckPoints;
 
     [Header("Camera config")]
     public float speedCam;
@@ -64,6 +71,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
     [Header("Start Game")]
     public Image gameplayImage;
     public Sprite[] spritesGameplay;
+
+    private bool isNewMusic;
 
     private void Start()
     {
@@ -113,6 +122,17 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
             perc = 1;
         }
 
+
+        if (isTransition)
+        {
+            if (perc >= 0.64f && !isNewMusic)
+            {
+                idCenario = 1;
+                StartCoroutine(audioController.ChangeMusic(audioController.fase2));
+                isNewMusic = true;
+            }
+        }
+
         if (perc >= 1f)
         {
             checkC.color = Color.white;
@@ -135,6 +155,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         currentState = GameState.Gameplay;
 
         GameObject temp = null;
+        GameObject pref = null;
+        GameObject fimPrefab = null;
         int rand;
         int instanciados = 1;
 
@@ -159,19 +181,43 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
             instanciados++;
         }
 
-        temp = Instantiate(hillPrefabsCheckPoints[1], transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
+        if (isTransition)
+        {
+            pref = transitionPrefab;
+            idTema = 1;
+        }
+        else
+        {
+            pref = hillPrefabsCheckPoints[1];
+        }
+
+
+        temp = Instantiate(pref, transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
         instanciados++;
 
         //parte 3
 
         for (int i = 0; i < qtdCenarios; i++)
         {
-            rand = Random.Range(0, hillPrefabs.Length);
-            temp = Instantiate(hillPrefabs[rand], transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
+            switch (idTema)
+            {
+                case 0:
+                    rand = Random.Range(0, hillPrefabs.Length);
+                    pref = hillPrefabs[rand];
+                    fimPrefab = hillPrefabsCheckPoints[2];
+                    break;
+                case 1:
+                    rand = Random.Range(0, desertPrefabs.Length);
+                    pref = desertPrefabs[rand];
+                    fimPrefab = desertPrefabsCheckPoints[2];
+                    break;
+            }
+
+            temp = Instantiate(pref, transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
             instanciados++;
         }
 
-        temp = Instantiate(hillPrefabsCheckPoints[2], transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
+        temp = Instantiate(fimPrefab, transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
 
         chegada = GameObject.Find("FlagC").transform;
 

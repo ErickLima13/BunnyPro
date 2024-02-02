@@ -6,6 +6,8 @@ public class AudioController : MonoBehaviour
 {
     private IsDone isDone;
 
+    public Fase mFase;
+
     [Header("Audio Controller")]
     public AudioSource music;
     public AudioSource fx;
@@ -33,6 +35,8 @@ public class AudioController : MonoBehaviour
 
     private void Start()
     {
+        mFase = GetComponent<Fase>();
+
         music.clip = title;
         music.loop = true;
         music.Play();
@@ -122,4 +126,5 @@ public class AudioController : MonoBehaviour
         isDone.isFinish = false;
         fadeAnimator.SetTrigger("fadeOut");
     }
+
 }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ControlScene : MonoBehaviour
 {
     private AudioController audioController;
+    public Fase fase;
 
     public Sprite[] stars;
 
@@ -13,9 +14,10 @@ public class ControlScene : MonoBehaviour
 
     public GameObject avatarPin;
    
-    void Start()
+    void Awake()
     {
         audioController = FindObjectOfType<AudioController>();
+        
 
         if (audioController == null)
         {
@@ -23,6 +25,7 @@ public class ControlScene : MonoBehaviour
             return;
         }
 
+        fase = audioController.mFase;
         audioController.FadeOut();
     }
 

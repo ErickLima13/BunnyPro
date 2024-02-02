@@ -33,6 +33,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
     public float tamanhoCenario;
     public int qtdCenarios;
     public int idTema;
+    public int newIdTema;
     public GameObject transitionPrefab;
     public GameObject[] hillPrefabs;
     public GameObject[] hillPrefabsCheckPoints;
@@ -68,6 +69,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
     private AudioController audioController;
 
+    public Fase aFase;
+
     [Header("Start Game")]
     public Image gameplayImage;
     public Sprite[] spritesGameplay;
@@ -81,6 +84,17 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         if (modo == ModoJogo.Producao)
         {
             audioController = FindObjectOfType<AudioController>();
+            aFase = audioController.mFase;
+
+            idCenario = aFase.idTema;
+            isTransition = aFase.isTransition;
+            qtdCenarios = aFase.qtdCenarios;
+            newIdTema = aFase.newIdTema;
+
+        }
+        else
+        {
+            idCenario = 0;
         }
 
         Criarfase();
@@ -127,7 +141,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         {
             if (perc >= 0.64f && !isNewMusic)
             {
-                idCenario = 1;
+                idCenario = newIdTema;
                 StartCoroutine(audioController.ChangeMusic(audioController.fase2));
                 isNewMusic = true;
             }
@@ -184,7 +198,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         if (isTransition)
         {
             pref = transitionPrefab;
-            idTema = 1;
+            idTema = newIdTema;
         }
         else
         {

@@ -5,11 +5,20 @@ using UnityEngine.UI;
 public class ButtonFase : MonoBehaviour
 {
     private ControlScene controlScene;
+    public Fase tempFase;
 
     public int qtdEstrelasFase; // salvar valor e resgatar no start
 
     [SerializeField] private TextMeshProUGUI faseText;
     [SerializeField] private GameObject block;
+
+    [Header("Config fase")]
+    public int idTema;
+    public bool isTransition;
+    public int newIdTema;
+    public int qtdCenarios;
+
+    [Space(25)]
 
     public Transform avatarPinPos;
 
@@ -24,15 +33,19 @@ public class ButtonFase : MonoBehaviour
     public int qtdCenouraCusto;
 
     public bool isBlock;
+    
+    public ScrollRect scrollRect;
 
     private void Initialization()
     {
         controlScene = FindObjectOfType<ControlScene>();
-
+        tempFase = controlScene.fase;
         CheckBlock();
 
 
         estrelasFase.sprite = controlScene.stars[qtdEstrelasFase];
+
+        scrollRect = FindObjectOfType<ScrollRect>();
     }
 
     private void Start()
@@ -86,8 +99,15 @@ public class ButtonFase : MonoBehaviour
     {
         if (!isBlock)
         {
+            tempFase.idTema = idTema;
+            tempFase.isTransition = isTransition;
+            tempFase.newIdTema = newIdTema;
+            tempFase.qtdCenarios = qtdCenarios;
+
             controlScene.avatarPin.transform.SetParent(transform);
             controlScene.avatarPin.transform.position = avatarPinPos.position;
+
+            
         }
     }
 }

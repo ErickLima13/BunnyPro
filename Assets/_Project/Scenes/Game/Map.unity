@@ -792,6 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f2d5dcc32ec364cb1d83bd3e2e627a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fase: {fileID: 0}
   stars:
   - {fileID: 21300000, guid: fdb510068095cf143821b004a476b94b, type: 3}
   - {fileID: 21300000, guid: 39c6633d9e735de45bc7f2704b2027b5, type: 3}
@@ -1104,7 +1105,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -1252, y: -395}
+  m_AnchoredPosition: {x: -1199, y: -430}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1399082826
@@ -1680,20 +1681,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3335537703385637317, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
       propertyPath: isBlock
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3484042964356712636, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
       propertyPath: isBlock
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4356365410731182168, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
+      propertyPath: idTema
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4356365410731182168, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
       propertyPath: isBlock
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4356365410731182168, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
       propertyPath: avatarPin
       value: 
       objectReference: {fileID: 877848498}
+    - target: {fileID: 4356365410731182168, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
+      propertyPath: newIdTema
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4356365410731182168, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
+      propertyPath: qtdCenarios
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4356365410731182168, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
+      propertyPath: isTransition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6151991257788597230, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
       propertyPath: isBlock
       value: 1
@@ -1806,6 +1823,10 @@ PrefabInstance:
       propertyPath: avatarPin
       value: 
       objectReference: {fileID: 877848498}
+    - target: {fileID: 8552625801540293162, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
+      propertyPath: qtdCenarios
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8552625801540293162, guid: 507cde635a7bb8d43a6fa129f9a2df9a, type: 3}
       propertyPath: qtdEstrelasFase
       value: 2

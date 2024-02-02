@@ -430,6 +430,7 @@ GameObject:
   - component: {fileID: 889850270}
   - component: {fileID: 889850269}
   - component: {fileID: 889850271}
+  - component: {fileID: 889850272}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: Untagged
@@ -486,6 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a096bbb89d327544946369f540be003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mFase: {fileID: 0}
   music: {fileID: 351107687}
   fx: {fileID: 1885750678}
   title: {fileID: 8300000, guid: bcb1d02969fa40241bc6548952e0c081, type: 3}
@@ -495,6 +497,22 @@ MonoBehaviour:
   gameOver: {fileID: 8300000, guid: 179bdc334c2047040af4efff612277d2, type: 3}
   coletavel: {fileID: 8300000, guid: c7cf52375eb028c4f8631670f25e5fdd, type: 3}
   fadeAnimator: {fileID: 2078155154}
+--- !u!114 &889850272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889850268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c18c7405474e8b41b3049169228e63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idTema: 0
+  isTransition: 0
+  newIdTema: 0
+  qtdCenarios: 0
 --- !u!1 &890908371
 GameObject:
   m_ObjectHideFlags: 0

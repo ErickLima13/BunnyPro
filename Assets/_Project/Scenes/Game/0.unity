@@ -1069,10 +1069,11 @@ MonoBehaviour:
   - {r: 0.5058824, g: 0.7960785, b: 0.9960785, a: 1}
   - {r: 0.77647066, g: 0.8745099, b: 0.9686275, a: 1}
   - {r: 0.21176472, g: 0.14117648, b: 0.3803922, a: 1}
-  isTransition: 1
+  isTransition: 0
   tamanhoCenario: 14.4
   qtdCenarios: 1
   idTema: 0
+  newIdTema: 0
   transitionPrefab: {fileID: 2324767156105307927, guid: dbab934f0dda7594faad1891cced05a8, type: 3}
   hillPrefabs:
   - {fileID: 4598346261662992554, guid: f7c6666d23ff4834187499d71801dff9, type: 3}
@@ -1108,6 +1109,7 @@ MonoBehaviour:
   chegada: {fileID: 0}
   ajuste: 0.7
   player: {fileID: 1388998609}
+  aFase: {fileID: 0}
   gameplayImage: {fileID: 61281833}
   spritesGameplay:
   - {fileID: -1872654165, guid: 2aae1d3b984d6344bb05d25026f87224, type: 3}

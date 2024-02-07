@@ -1083,18 +1083,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 6462552742836076405, guid: feb077f848369e446a8ffbb5cb869627, type: 3}
-      propertyPath: m_Spacing.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462552742836076405, guid: feb077f848369e446a8ffbb5cb869627, type: 3}
-      propertyPath: m_CellSize.x
-      value: 130
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462552742836076405, guid: feb077f848369e446a8ffbb5cb869627, type: 3}
-      propertyPath: m_CellSize.y
-      value: 130
-      objectReference: {fileID: 0}
     - target: {fileID: 6716076404737637975, guid: feb077f848369e446a8ffbb5cb869627, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

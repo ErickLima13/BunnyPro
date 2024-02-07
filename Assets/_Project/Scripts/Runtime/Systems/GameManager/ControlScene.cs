@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,14 +9,19 @@ public class ControlScene : MonoBehaviour
 
     public Sprite[] stars;
 
+    [Header("HUD")]
     public int qtdCenouras;
+    public int qtdDiamantes;
+    public int qtdEstrelas;
+    public TextMeshProUGUI cenourasText;
+    public TextMeshProUGUI diamantesText;
 
     public GameObject avatarPin;
-   
+
     void Awake()
     {
         audioController = FindObjectOfType<AudioController>();
-        
+
 
         if (audioController == null)
         {
@@ -27,12 +31,18 @@ public class ControlScene : MonoBehaviour
 
         fase = audioController.mFase;
         audioController.FadeOut();
+
+        qtdCenouras = PlayerPrefs.GetInt("qtdCenouras");
+        qtdDiamantes = PlayerPrefs.GetInt("qtdDiamantes");
+        //qtdEstrelas = PlayerPrefs.GetInt("qtdEstrelas");
+
+        cenourasText.text = qtdCenouras.ToString();
+        diamantesText.text = qtdDiamantes.ToString();
+       
     }
 
     public void BtnFase()
     {
         audioController.TrocarCena("0", true, audioController.fase);
     }
-
-
 }

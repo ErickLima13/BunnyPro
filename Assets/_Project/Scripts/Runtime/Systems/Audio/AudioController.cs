@@ -127,4 +127,14 @@ public class AudioController : MonoBehaviour
         fadeAnimator.SetTrigger("fadeOut");
     }
 
+    public void MuteMusic()
+    {
+        music.mute = !music.mute;
+    }
+
+    public void MuteFx()
+    {
+        fx.mute = !fx.mute;
+    }
+
 }

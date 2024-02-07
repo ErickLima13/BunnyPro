@@ -35,6 +35,8 @@ public class ButtonFase : MonoBehaviour
     public bool isBlock;
     
     public ScrollRect scrollRect;
+    public RectTransform rectTransform;
+    //public Transform contentPanel;
 
     private void Initialization()
     {
@@ -46,6 +48,7 @@ public class ButtonFase : MonoBehaviour
         estrelasFase.sprite = controlScene.stars[qtdEstrelasFase];
 
         scrollRect = FindObjectOfType<ScrollRect>();
+        rectTransform = GetComponent<RectTransform>();
     }
 
     private void Start()
@@ -106,8 +109,14 @@ public class ButtonFase : MonoBehaviour
 
             controlScene.avatarPin.transform.SetParent(transform);
             controlScene.avatarPin.transform.position = avatarPinPos.position;
+  
+ 
 
-            
+
         }
     }
+
+ 
+
+
 }

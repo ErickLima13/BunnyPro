@@ -12,6 +12,9 @@ public class DBPersonagens : MonoBehaviour
     public Texture[] spriteSheetName;
 
 
-
+    private void Start()
+    {
+        idPersonagemAtual = PlayerPrefs.GetInt("idPersonagemAtual");
+    }
 
 }

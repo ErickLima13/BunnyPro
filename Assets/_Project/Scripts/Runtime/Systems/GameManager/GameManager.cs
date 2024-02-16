@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Plastic.Newtonsoft.Json.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
@@ -7,7 +9,8 @@ public enum GameState
 {
     Intro,
     Map,
-    Gameplay
+    Gameplay,
+    Hit
 }
 
 public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
@@ -77,9 +80,18 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
     private bool isNewMusic;
 
+    private Transform[] checkPointsPos;
+
+    public Transform currentCheckPoint;
+    public Vector3 startPos;
+
     private void Start()
     {
+        checkPointsPos = new Transform[2];
+
         player = FindObjectOfType<PlayerController>();
+
+        startPos = player.transform.position;
 
         if (modo == ModoJogo.Producao)
         {
@@ -100,6 +112,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         Criarfase();
 
         gameplayImage.enabled = false;
+
+       
     }
 
     private void Update()
@@ -139,7 +153,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
         if (isTransition)
         {
-            if (perc >= 0.64f && !isNewMusic)
+            if (perc >= 0.66f && !isNewMusic)
             {
                 idCenario = newIdTema;
                 StartCoroutine(audioController.ChangeMusic(audioController.fase2));
@@ -155,10 +169,12 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         if (perc >= 0.66f)
         {
             checkB.color = Color.white;
+            currentCheckPoint = checkPointsPos[1];
         }
         else if (perc >= 0.33f)
         {
             checkA.color = Color.white;
+            currentCheckPoint = checkPointsPos[0];
         }
 
         progressBar.fillAmount = perc;
@@ -184,6 +200,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         }
 
         temp = Instantiate(hillPrefabsCheckPoints[0], transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
+        checkPointsPos[0] = temp.transform;
         instanciados++;
 
         //parte 2 
@@ -207,6 +224,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
 
         temp = Instantiate(pref, transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
+        checkPointsPos[1] = temp.transform;
         instanciados++;
 
         //parte 3
@@ -278,7 +296,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         backGrounds.position = new(cam.transform.position.x, 0, 0);
     }
 
-    private IEnumerator StartGameplay()
+    public IEnumerator StartGameplay()
     {
         yield return new WaitForSeconds(1f);
 

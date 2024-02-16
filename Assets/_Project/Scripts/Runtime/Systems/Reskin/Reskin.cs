@@ -17,6 +17,8 @@ public class Reskin : MonoBehaviour
 
     public bool isMap; 
 
+    public BoxSelection boxSelection;
+
     private void Start()
     {
         DBPersonagens = FindObjectOfType<DBPersonagens>();
@@ -33,8 +35,8 @@ public class Reskin : MonoBehaviour
             sRender = GetComponentInChildren<SpriteRenderer>();
         }
         else
-        {
-            imageMap = GetComponent<Image>();   
+        {     
+            imageMap = GetComponent<Image>();
         }
 
         LoadSpriteSheet();
@@ -62,6 +64,15 @@ public class Reskin : MonoBehaviour
             }
             else
             {
+                if (boxSelection != null)
+                {
+                    if (DBPersonagens.idPersonagemAtual != boxSelection.idPersonagem)
+                    {
+                        spriteSheetName = DBPersonagens.spriteSheetName[boxSelection.idPersonagem].name;
+                        LoadSpriteSheet();
+                    }
+                }
+
                 imageMap.sprite = spriteSheet[imageMap.sprite.name];
             }
         }

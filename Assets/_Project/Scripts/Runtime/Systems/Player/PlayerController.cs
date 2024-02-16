@@ -1,9 +1,17 @@
+using PainfulSmile.Runtime.Utilities;
+using Unity.Plastic.Newtonsoft.Json.Serialization;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public event Action OnPlayerTakeHit;
+
     private Animator animator;
     private Rigidbody2D playerRb;
+    private DBPersonagens dbChar;
+
+    public IsVisible onVisible;
+    public Status lifeControl;
 
     private int idAnim;
     private float speedY;
@@ -12,11 +20,14 @@ public class PlayerController : MonoBehaviour
     private bool isLeft;
     private bool isFall;
     private bool isDoubleJump;
+    public bool isHit;
+    public bool isMayHaveDoubleJump;
 
     private GameManager gameManager;
     
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float jForce = 150;
     [SerializeField][Range(0.5f, 0.9f)] private float percDoubleJumpForce = 0.7f;
 
     [SerializeField] private Transform groundCheck;
@@ -29,7 +40,19 @@ public class PlayerController : MonoBehaviour
     {
         gameManager = GameManager.Instance; 
         animator = GetComponentInChildren<Animator>();
+        onVisible = GetComponentInChildren<IsVisible>();
+        lifeControl = GetComponentInChildren<Status>();
         playerRb = GetComponent<Rigidbody2D>();
+        dbChar = FindObjectOfType<DBPersonagens>();
+
+        if (dbChar != null)
+        {
+            int idAtual = dbChar.idPersonagemAtual;
+            speed = dbChar.velocidadeMovimento[idAtual];
+            jumpForce = dbChar.forcaPulo[idAtual] * jForce;
+            isMayHaveDoubleJump = dbChar.puloDuplo[idAtual];
+            lifeControl.maxLife = dbChar.pontosDeVida[idAtual];
+        }
     }
 
     private void FixedUpdate()
@@ -48,7 +71,20 @@ public class PlayerController : MonoBehaviour
         UpdateAnimator();
         Jump();
         Move();
-       
+        CheckFall();  
+    }
+
+    private void CheckFall()
+    {
+        if (!isHit)
+        {
+            if (transform.position.y < -5f)
+            {
+                OnPlayerTakeHit?.Invoke();
+                lifeControl.HealthChange(1);
+                isHit = true;
+            }
+        }
     }
 
     private void Move()
@@ -88,7 +124,7 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(new Vector2(0, jumpForce));
         }
 
-        if (Input.GetButtonDown("Jump") && !isGrounded && isDoubleJump)
+        if (Input.GetButtonDown("Jump") && !isGrounded && isDoubleJump && isMayHaveDoubleJump)
         {
             playerRb.velocity = new Vector2(0, 0);
             playerRb.AddForce(new Vector2(0, jumpForce * percDoubleJumpForce));

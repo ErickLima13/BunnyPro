@@ -450,13 +450,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a173e184b79dceb4ba9faa7775d1af83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idPersonagem: 1
+  idPersonagem: 0
   idPersonagemAtual: 0
-  nomePersonagem: []
+  nomePersonagem:
+  - Dummy
+  - Bunny
+  - Fredy
   spriteSheetName:
   - {fileID: 2800000, guid: 8b36e62c1a6f50b4b982b52230f66f48, type: 3}
   - {fileID: 2800000, guid: 30e53241696046740a97c792e1649a5d, type: 3}
   - {fileID: 2800000, guid: 575abe7dc5e243943951e5b4c6755e7b, type: 3}
+  pontosDeVida: 050000000600000007000000
+  velocidadeMovimento: 060000000600000005000000
+  forcaPulo: 040000000400000005000000
+  puloDuplo: 000100
+  liberado: 010000
+  precoEstrela: 000000000a0000000f000000
+  precoDiamantes: 00000000190000001e000000
 --- !u!4 &889850270
 Transform:
   m_ObjectHideFlags: 0
@@ -602,6 +612,7 @@ MonoBehaviour:
   tamanhoCenario: 14.4
   qtdCenarios: 6
   idTema: 0
+  newIdTema: 0
   transitionPrefab: {fileID: 0}
   hillPrefabs:
   - {fileID: 2324767156105307927, guid: a3c113cdba3edb2448ab4a64f5c347d2, type: 3}
@@ -630,8 +641,11 @@ MonoBehaviour:
   chegada: {fileID: 0}
   ajuste: 1.2
   player: {fileID: 0}
+  aFase: {fileID: 0}
   gameplayImage: {fileID: 0}
   spritesGameplay: []
+  currentCheckPoint: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1076973989
 Transform:
   m_ObjectHideFlags: 0

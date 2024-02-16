@@ -9,10 +9,12 @@ public class ControlScene : MonoBehaviour
 
     public Sprite[] stars;
 
-    [Header("HUD")]
+    [Header("Currencies")] // tranformar em scriptables object
     public int qtdCenouras;
     public int qtdDiamantes;
     public int qtdEstrelas;
+
+    [Header("HUD")]
     public TextMeshProUGUI cenourasText;
     public TextMeshProUGUI diamantesText;
     public TextMeshProUGUI estrelasText;
@@ -31,15 +33,13 @@ public class ControlScene : MonoBehaviour
         qtdDiamantes = PlayerPrefs.GetInt("qtdDiamantes");
         qtdEstrelas = PlayerPrefs.GetInt("qtdEstrelas");
 
-        cenourasText.text = qtdCenouras.ToString();
-        diamantesText.text = qtdDiamantes.ToString();
-        estrelasText.text = qtdEstrelas.ToString();
+        UpdateHud();
 
         loja.SetActive(false);
         hudCarrots.SetActive(!loja.activeSelf);
         hudStars.SetActive(loja.activeSelf);
 
-        audioController.FadeOut();
+        
     }
 
     void Awake()
@@ -53,6 +53,7 @@ public class ControlScene : MonoBehaviour
         }
 
         fase = audioController.mFase;
+        audioController.FadeOut();
     }
 
     private void Start()
@@ -70,5 +71,12 @@ public class ControlScene : MonoBehaviour
         loja.SetActive(!loja.activeSelf);
         hudCarrots.SetActive(!loja.activeSelf);
         hudStars.SetActive(loja.activeSelf);
+    }
+
+    public void UpdateHud()
+    {
+        cenourasText.text = qtdCenouras.ToString();
+        diamantesText.text = qtdDiamantes.ToString();
+        estrelasText.text = qtdEstrelas.ToString();
     }
 }

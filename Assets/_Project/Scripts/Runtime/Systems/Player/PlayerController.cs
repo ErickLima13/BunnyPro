@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     public bool isMayHaveDoubleJump;
 
     private GameManager gameManager;
-    
-    [SerializeField] private float speed;
+
+    public float speed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float jForce = 150;
     [SerializeField][Range(0.5f, 0.9f)] private float percDoubleJumpForce = 0.7f;
@@ -35,10 +35,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
 
     public float horizontal;
+    public Transform colectPosition;
 
     private void Start()
     {
-        gameManager = GameManager.Instance; 
+        gameManager = GameManager.Instance;
         animator = GetComponentInChildren<Animator>();
         onVisible = GetComponentInChildren<IsVisible>();
         lifeControl = GetComponentInChildren<Status>();
@@ -67,11 +68,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
-    {       
+    {
         UpdateAnimator();
         Jump();
         Move();
-        CheckFall();  
+        CheckFall();
     }
 
     private void CheckFall()
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.GetButtonUp("Jump") && !isFall)
-        { 
+        {
             playerRb.velocity = new Vector2(0, playerRb.velocity.y / 2);
             isFall = true;
         }

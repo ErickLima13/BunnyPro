@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Plastic.Newtonsoft.Json.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using Random = UnityEngine.Random;
 
 public enum GameState
 {
@@ -37,6 +39,13 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
     public int qtdCenarios;
     public int idTema;
     public int newIdTema;
+
+    //letras 
+    public GameObject[] letters;
+    public float[] percLetter;
+    public List<GameObject> letra;
+    public List<GameObject> cenarios;
+
     public GameObject transitionPrefab;
     public GameObject[] hillPrefabs;
     public GameObject[] hillPrefabsCheckPoints;
@@ -84,6 +93,10 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
     public Transform currentCheckPoint;
     public Vector3 startPos;
+
+    [Header("Power Ups")]
+    public bool ima;
+    public float distanceCollect;
 
     private void Start()
     {
@@ -197,11 +210,13 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
             rand = Random.Range(0, hillPrefabs.Length);
             temp = Instantiate(hillPrefabs[rand], transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
             instanciados++;
+            cenarios.Add(temp);
         }
 
         temp = Instantiate(hillPrefabsCheckPoints[0], transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
         checkPointsPos[0] = temp.transform;
         instanciados++;
+        cenarios.Add(temp);
 
         //parte 2 
 
@@ -210,6 +225,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
             rand = Random.Range(0, hillPrefabs.Length);
             temp = Instantiate(hillPrefabs[rand], transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
             instanciados++;
+            cenarios.Add(temp);
         }
 
         if (isTransition)
@@ -226,6 +242,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         temp = Instantiate(pref, transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
         checkPointsPos[1] = temp.transform;
         instanciados++;
+
+        cenarios.Add(temp);
 
         //parte 3
 
@@ -247,6 +265,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
             temp = Instantiate(pref, transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
             instanciados++;
+            cenarios.Add(temp);
         }
 
         temp = Instantiate(fimPrefab, transform.position + new Vector3(instanciados * tamanhoCenario, 0, 0), transform.localRotation);
@@ -256,6 +275,32 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
         rightLimit.position = temp.transform.position;
 
         distancia = Vector2.Distance(player.transform.position, chegada.position) - ajuste;
+
+
+        // instanciando letras
+
+        int idCenario = 1;
+
+        foreach (GameObject g in cenarios)
+        {
+            int idLetra = letra.Count;
+
+            if (letra.Count < 5)
+            {
+                int posLetra = Mathf.RoundToInt(cenarios.Count / percLetter[idLetra]);
+                print(posLetra);
+
+                if (posLetra == idCenario)
+                {
+                    print("AQUI");
+
+                    Transform t = g.GetComponent<SpawnLetter>().GetPoint();
+                    GameObject letraTemp = Instantiate(letters[idLetra],t.position,t.localRotation);
+                    letra.Add(letraTemp);
+                }
+            }
+            idCenario++;
+        }
 
         if (audioController != null && modo == ModoJogo.Producao)
         {

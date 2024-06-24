@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Plastic.Newtonsoft.Json.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
 public enum GameState
@@ -68,6 +65,8 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
     public Image checkB;
     public Image checkC;
     public Image progressBar;
+    public Image[] collectablesLetters;
+
 
     [Header("Variaveis do percentual do progresso")]
     public float distancia;
@@ -126,7 +125,7 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
         gameplayImage.enabled = false;
 
-       
+
     }
 
     private void Update()
@@ -287,20 +286,19 @@ public class GameManager : PainfulSmile.Runtime.Core.Singleton<GameManager>
 
             if (letra.Count < 5)
             {
-                int posLetra = Mathf.RoundToInt(cenarios.Count / percLetter[idLetra]);
-                print(posLetra);
+                int posLetra = Mathf.RoundToInt(cenarios.Count * percLetter[idLetra]);
 
                 if (posLetra == idCenario)
                 {
-                    print("AQUI");
-
                     Transform t = g.GetComponent<SpawnLetter>().GetPoint();
-                    GameObject letraTemp = Instantiate(letters[idLetra],t.position,t.localRotation);
+                    GameObject letraTemp = Instantiate(letters[idLetra], t.position, t.localRotation);
                     letra.Add(letraTemp);
                 }
             }
             idCenario++;
         }
+
+        cenarios.Clear();
 
         if (audioController != null && modo == ModoJogo.Producao)
         {

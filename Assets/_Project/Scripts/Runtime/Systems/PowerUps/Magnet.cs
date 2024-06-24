@@ -25,12 +25,7 @@ public class Magnet : MonoBehaviour
     }
     private IEnumerator ActivePowerUp()
     {
-        print("VOu esperar");
-
         yield return new WaitForSeconds(activeTimer);
-
-        print("ESperei");
-
         gameManager.ima = false;
     }
 }
